@@ -1,44 +1,371 @@
-\documentclass{article}
+\documentclass[a4paper,11pt,twoside]{report}
 
-\title{Analys av strategi}
-\date{2013-09-01}
-\author{
-  Cederblad, Cecilia\\
-  \texttt{cecce127@student.liu.se}
-  \and
-  Dahlström, Didrik\\
-  \texttt{didda444@student.liu.se}
-  \and
-  Dalshagen, Mathias\\
-  \texttt{matda994@student.liu.se}
-  \and
-  Fischer, Max\\
-  \texttt{maxfi539@student.liu.se}
-  \and
-  Lundqvist, Felix\\
-  \texttt{fellu860@student.liu.se}
+%%% \begin{FORMATING_REGION}
+%\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath}%
+\usepackage{amsthm}
+\usepackage{amsfonts}%
+\usepackage{amssymb}%
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{eurosym}
+\usepackage{eso-pic}			
+\usepackage[top=2cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage{subcaption}
+\usepackage{lscape}
+\usepackage{epstopdf}
+\usepackage{wrapfig}
+\usepackage{listings}
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=black, citecolor=blue, urlcolor=blue]{hyperref}
+
+% For the tree
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{apacite} 
+\usepackage{mdframed}
+\bibliographystyle{apacite}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{proposal}{F�rslag}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Exempel}[section]
+
+
+\usepackage{enumitem}
+\setlist{leftmargin=5.5mm}
+
+
+%stylish beginning of chapter letters
+\usepackage{type1cm} % scalable fonts
+
+
+\newcommand*{\Path}{Resources}%
+
+
+
+%\newcommand\initfamily{\usefont{U}{GoudyIn}{xl}{n}}
+%\newcommand\initfamily{\usefont{U}{Acorn}{xl}{n}}
+
+\usepackage{mflogo}
+%\usepackage[T1]{fontenc}
+%\newcommand\initfamily{\fontfamily{mflogo}}
+%\newcommand\initfamily{ppl}
+%\renewcommand{\LettrineFontHook}{\initfamily}
+%\renewcommand*\rmdefault{ppl}
+
+\newcommand\initfamily{\sffamily}
+
+\usepackage{wrapfig}
+
+%\newcommand{\CL}[1]{\lettrine[lines=3,slope=-4pt,nindent=-4pt]{#1}{}}
+%\newcommand{\CL}[1]{\lettrine[lines=3,slope=-4pt,nindent=+4pt]{#1}{}}
+
+%Landscape
+\usepackage{rotating,booktabs}
+
+%Color in table
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.95}	% Table alternate color
+\definecolor{dGray}{gray}{0.8} 	% Tow tow Table color
+\definecolor{m1Gray}{gray}{0.95} % Marked cell color if white bg
+\definecolor{m2Gray}{gray}{1}   % Marked cell color if Gray bg
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{ExploreBlue}{RGB}{0,176,240}
+\definecolor{green}{RGB}{131,184,23}
+%Custom chapter headings
+\definecolor{RoyalRed}{RGB}{157,16, 45}
+\definecolor{almost_black}{gray}{0.5}
+
+\definecolor{col_1}{RGB}{34,43,53}
+\definecolor{col_2}{RGB}{47,117,181}
+\definecolor{col_3}{RGB}{31,78,120}
+\definecolor{col_4}{RGB}{132,151,176}
+
+
+\usepackage{titlesec}
+
+\newcommand{\hsp}{\hspace{20pt}}
+%\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{col_1}{\textbf{|}}\hsp}{0pt}{\Huge\bfseries}
+%%%%%%%%%%%%%%%%%%%%%
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{col_1}{\textbf{|}}\hsp}{0pt}
+  {\begin{tikzpicture}[remember picture,overlay]
+    \node[yshift=-2cm] at (current page.north west)
+      {\begin{tikzpicture}[remember picture, overlay]
+        \node at (10.8,2) {\includegraphics[scale=0.75]{example_3.png}};
+       \end{tikzpicture}
+      };
+   \end{tikzpicture}
+  }
+
+%%%%%%%%%%%%%%%%%%%%%
+
+
+	
+%Custom section heading
+\titleformat{\section}
+{\color{black}\normalfont\Large\bfseries}
+{\color{black}\thesection\vspace{5 mm}}{1em}{}
+
+%Custom subsection heading
+\titleformat{\subsection}
+{\color{black}\normalsize\normalsize\bfseries}
+{\color{black}\thesubsection\vspace{10 mm}}{1em}{}
+
+%Dashed table lines
+\usepackage{arydshln}
+
+%% Header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%scr letter
+\usepackage{mathrsfs}
+
+%Languages
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[swedish]{babel}
+
+%Appendices
+%\usepackage[toc,page]{appendix}
+%\renewcommand{\chaptername}{}
+%\renewcommand{\thechapter}{}
+
+
+\setcounter{secnumdepth}{2} %how deep the numbering should be in chapters
+\setcounter{tocdepth}{2}	%Depth of TOC
+
+%Symbol for independence
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\genby}{\triangleleft\overleftarrow{\mathscr{G}}\triangleleft}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%--------------------------------------------------------
+\usepackage{grffile}
+\DeclareGraphicsExtensions{.png,.pdf}
+
+\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
+\definecolor{namecolor}{cmyk}{1,.50,0,.10} 
+
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\usepackage{lmodern} % Use Latin Modern instead of Computer Modern
+
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage[some]{background}
+\usepackage{lipsum}
+\usepackage{multicol}
+
+\definecolor{titlepagecolor}{RGB}{255,255,255}
+\definecolor{dark_green}{RGB}{100,100,100}
+\definecolor{AP3_green}{RGB}{122,192,62}
+\definecolor{light_green}{RGB}{215,228,189}
+
+\definecolor{AP3_blue}{RGB}{70,120,180}
+\definecolor{light_blue}{RGB}{185,205,229}
+\definecolor{cerulean}{RGB}{0,176,240}
+
+\renewcommand{\labelitemi}{\textcolor[RGB]{0,176,240}{\textbf{$>$}}}
+\renewcommand{\labelitemii}{\textcolor[RGB]{0,176,240}{\textbf{$\bullet$}}}
+\renewcommand{\labelitemiii}{\textcolor[RGB]{0,176,240}{$\circ$}}
+\renewcommand{\labelitemiv}{\textcolor[RGB]{0,176,240}{$\circ$}}
+
+
+\author{%
+    \textbf{Abc123}\\
+		ABC\\
+		abcz@123.com\\
+    }
+		
+		
+		
+\mdfdefinestyle{theoremstyle_green}{ linecolor=AP3_green,linewidth=1.5pt, frametitlerule=true, frametitlebackgroundcolor=light_green, innertopmargin=\topskip } 
+\mdfdefinestyle{theoremstyle_blue}{ linecolor=AP3_blue,linewidth=1.5pt, frametitlerule=true, frametitlebackgroundcolor=light_blue, innertopmargin=\topskip } 
+
+
+\usepackage{calc}
+% The blue line on top of regular pages %
+\def\companylogo{\includegraphics[scale=0.1]{liu_logo_ny.png}}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\fancyhead[LE]{\hspace*{-0.2\headwidth}\colorbox{col_2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{white}\thepage}}%
+               \colorbox{col_3}{\makebox[\dimexpr\headwidth-2\fboxsep][l]{\strut\nouppercase{\textcolor{white}\leftmark}}}}
+\fancyhead[LO]{\colorbox{col_3}{\makebox[\dimexpr\headwidth-2\fboxsep][r]{\strut\nouppercase{\textcolor{white}\leftmark}}}%
+                \colorbox{col_2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{white}\thepage}}}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancyfoot[L]{
+    \parbox[b]{\dimexpr\linewidth-3cm\relax}{\sffamily \hfill \\
+    \hfill \\
+    {\color{col_1}\rule{\dimexpr\linewidth\relax}{0.4pt}}\\
+    \textbf{A Strategic Case Study of Mycronic AB    |}    TEIE72: Group 22}
+    }
+    \fancyfoot[R]{
+    \parbox[b]{2cm}{\companylogo}%
+    }
+		
+
+\backgroundsetup{
+scale=1,
+angle=0,
+opacity=1,
+contents={\begin{tikzpicture}[remember picture,overlay]
+\path [fill=titlepagecolor] (current page.west)rectangle (current page.north east);
+\draw [color=col_1, line width=3mm] (-5.5,8)--(-5.5,-5);
+\node at (7.5,10.5) {\textcolor[rgb]{0,0,0}{}};
+\node at (8.5,13) {\includegraphics[scale=0.1]{liu_logo_ny.png}};
+\node [anchor=west] at (-5,7) {\huge\textcolor[rgb]{0,0,0}{\Huge\textsf{\bf TEIE72} }};
+\node [anchor=west] at (-5,5.5) {\Large\textcolor[rgb]{0,0,0}{\textsf{\bf \textit{A Strategic Case Study of Mycronic AB}}}};
+\node [anchor=west] at (-5,3.5) {\Large\textcolor[rgb]{0,0,0}{\textsf{\bf \textit{Grupp 22}}}};
+\node [anchor=west] at (-5,2.5) {\Large\textcolor[rgb]{0,0,0}{\bf\textsf{Cederblad, Cecilia}}};
+\node [anchor=west] at (1,2.5) {\Large\textcolor[rgb]{0,0,0}{cecce127@student.liu.se}};
+\node [anchor=west] at (-5,1.5) {\Large\textcolor[rgb]{0,0,0}{\bf\textsf{Dahlstr\"om, Didrik}}};
+\node [anchor=west] at (1,1.5) {\Large\textcolor[rgb]{0,0,0}{didda444@student.liu.se}};
+\node [anchor=west] at (-5,0.5) {\Large\textcolor[rgb]{0,0,0}{\bf\textsf{Dalshagen, Mathias}}};
+\node [anchor=west] at (1,0.5) {\Large\textcolor[rgb]{0,0,0}{matda994@student.liu.se}};
+\node [anchor=west] at (-5,-0.5) {\Large\textcolor[rgb]{0,0,0}{\bf\textsf{Fischer, Max}}};
+\node [anchor=west] at (1,-0.5) {\Large\textcolor[rgb]{0,0,0}{maxfi539@student.liu.se}};
+\node [anchor=west] at (-5,-1.5) {\Large\textcolor[rgb]{0,0,0}{\bf\textsf{Lundqvist, Felix}}};
+\node [anchor=west] at (1,-1.5) {\Large\textcolor[rgb]{0,0,0}{fellu860@student.liu.se}};
+\node [anchor=west] at (-5,-4.5) {\Large\textcolor[rgb]{0,0,0}{\textsf{2017-08-30}}};
+%\node at (0,-9) {\includegraphics[scale=1.1]{background.png}};
+\end{tikzpicture}}
+}
+\makeatletter                   
+\def\printauthor{%                  
+    {\large \@author}}          
+\makeatother
+
+%\lfoot{\includegraphics[width=1\textwidth]{header_1.png}}
+%\usepackage{everypage}
+\usepackage{tikzpagenodes}
+\usetikzlibrary{calc}
+\usepackage{mwe}
+
+%\pagestyle{empty}
+
+%\AddEverypageHook{
+%\fancyfoot[C]{
+%\begin{tikzpicture}[remember picture,overlay]
+%\node at (8.5,-26.5) {\includegraphics[width=1.5\textwidth]{footer_1.png}};%(X,Y)
+%\end{tikzpicture}
+%}
+
+
+
+
+\usepackage{lipsum}% Used for dummy text.		
+\setlength{\columnsep}{1cm}
+%\AtBeginDocument{\renewcommand{\abstractname}{}}
+%\AtBeginDocument{\renewcommand{\chaptername}{}}
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\setlength{\columnseprule}{2pt}
+\renewcommand{\columnseprulecolor}{\color{col_4}}
+
+
+
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{#1} }
+\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
+
+
+
+\newcounter{chapshift}
+%\addtocounter{chapshift}{-1}
+
+
+
+% the list of colors to be used (add more if needed)
+\newcommand\BoxColor{%
+  \ifcase\thechapshift blue!30\or col_1\or col_2\or col_3\or col_4\or col_1\or col_2\else col_3\fi}
+
+% the main command; the mandatory argument sets the color of the vertical box
+\newcommand\ChapFrame{%
+  \AddEverypageHook{%
+    \ifodd\value{page}
+      \backgroundsetup{contents={%
+        \begin{tikzpicture}[overlay,remember picture]
+          \node[
+            fill=\BoxColor,
+            inner sep=-2mm,
+            rectangle,
+            text width=2cm,
+            text height=4cm,
+            align=center,
+            anchor=north east
+          ] 
+          at ($ (current page.north east) + (-0cm,-2*\thechapshift cm) $) 
+          {\rotatebox{90}{\hspace*{.3cm}\parbox[c][1.5cm][t]{3.4cm}{%
+              \raggedright\textcolor{white}{\bf\leftmark}}}};
+        \end{tikzpicture}%
+      }%
+    }  
+    \else
+      \backgroundsetup{contents={%
+        \begin{tikzpicture}[overlay,remember picture]
+        \node[
+          fill=\BoxColor,
+          inner sep=-2mm,
+          rectangle,
+          text width=2cm,
+          text height=4cm,
+          align=center,
+          anchor=north west
+        ] 
+        at ($ (current page.north west) + (-0cm,-2*\thechapshift cm) $) 
+        {\rotatebox{90}{\hspace*{.3cm}\parbox[c][1.5cm][b]{3.4cm}{%
+            \raggedright\textcolor{white}{\bf\leftmark}}}};
+        \end{tikzpicture}%
+      }%
+    }  
+    \fi
+  \BgMaterial}%
+  \stepcounter{chapshift}%
 }
 
+\renewcommand\chaptermark[1]{\markboth{\thechapter.~#1}{}}
+
+%%% \end{FORMATING_REGION}
+
 \begin{document}
-  \pagenumbering{gobble}
-  \maketitle
-  \newpage
-  \pagenumbering{arabic}
 
- \section{Inledning}
 
-Hello World!
+\begin{titlepage}
+\BgThispage
+\newgeometry{left=1cm,right=6cm,bottom=2cm}
+\vspace*{0.4\textheight}
+\vspace*{2cm}\par
+\begin{minipage}{0.8\linewidth}
+\vspace{20pt}
+\end{minipage}
+\end{titlepage}
+%\clearpage
+%\tableofcontents
+%\clearpage
 
-\section{Bakgrund}
+\pagenumbering{arabic}
 
-Den här delen kommer att gå igenom blablabla...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Mycronic: \normalfont{This is a case study}}
 
-\subsection{Omvärld}
-
-Här kommer omvärlden
-
-\subsubsection{Intern struktur}
-
-Igga zigga! Saker kan stå här. Even more text.
-
+\section{Empiri}
+Det �r h�r vi kommer att skriva senare eller nu om ni vill b�rja!
+ 
 \end{document}
